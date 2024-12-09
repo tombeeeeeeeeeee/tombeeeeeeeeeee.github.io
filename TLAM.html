@@ -63,13 +63,15 @@
                                     <h3 class="major">Texture Lookups!</h3>
 									<p>The biggest problem then became colliding with the environment, what I wanted was a simple at runtime operation, which could be offloaded by some work during level editing, the environment of the level never changes at runtime so lets use that to our advantage. That means taking the process to an editing step, such as saving the level, so it became pretty clear from here, since the games physics is entirely in 2D this can be used to our advantage, by creating a signed distance field of all the colliders on the level, its easy to make a texture from there of everywhere that a collider isn't, and the distance it is from the nearest collider, this value can be a linear scalar of the force that the boid should experience, and then the displacement from that point to the nearest point on the collider should give us the direction a boid should move. using the displacement from the point rather than the normal of the edge should help mean that corners of colliders have a softened edge.</p>
 
-                                    <p><strong>IMAGE HERE</strong></p>
+                                    <div class="col-6"><span class="image fit"><img src="images/A_Test01.png" alt="" /></span></div>
 
                                     <p>Now look at that, we have a flow map of the level which helps boids move away from colliders, reading this into an array at the start of every scene should help set us up to succeed, but there becomes one major issue, working in this way isn't designer friendly, automating the process means places on the map could end up having enemies get stuck.</p>
 
                                     <p><strong>ENEMIES GETTING STUCK</strong></p>
 
                                     <p>So in addition to creating the flow map, a guiding tool was also made, just a simple unit circle of directions that designers can use to paint over the top of the saved texture and use it to encourage enemies.</p>
+
+									<div class="col-6"><span class="image fit"><img src="images/unitcircle.PNG" alt="" /></span></div>
 
 									<h3 class="major">Whats Next? The Conclusion?</h3>
 									<p>Enemies now move towards the player, and it didnt take too uch out of our short time to get it in motion. As we have been testing our game, enemies still cause a bit of lag, If I had more time I'd go back and do a similar texture look up for the line of sight, where Id create an SDF and look up along its line, but thats for future me to worry about, less future me is enjoying the sunshine!</p>
@@ -85,7 +87,7 @@
 							<h2 class="major">Get in touch</h2>
 							<p>I'm always happy to talk, be that via email, LinkedIn, or however else you can get a hold of me. <br> I am available to chat about my work, about doing work, or just any general questions or topics <3 </p>
 							<ul class="contact">
-								<li class="icon solid fa-envelope"><a href="obr0008@gmail">obr0008@gmail.com</a></li>
+								<li class="icon solid fa-envelope"><a href="mailto:contact@tomtomobrien.com">contact@tomtomobrien.com</a></li>
 								<li class="icon brands fa-github"><a href= "https://github.com/tombeeeeeeeeeee"> Github </a></i>
 								<li class="icon brands fa-linkedin"><a href= "https://www.linkedin.com/in/thomas-o-brien-va-dev/"> LinkedIn </a></i>
 								<li class="icon brands fa-spotify"><a href= "https://open.spotify.com/artist/1xL1xhQqsOfYD3nHovp42M?si=8sLZxxpyTOOam05KC0ZnCw"> My Band: Mac and the Steeze </a></i>

@@ -43,7 +43,7 @@
 						<header>
 							<div class="inner">
 								<h2>Lines, Lights, and Shadows</h2>
-								<p>Taking Artistic Expression and Progamming to our custom engine</p>
+								<p>Taking Artistic Expression and Programming to our custom engine</p>
 							</div>
 						</header>
 
@@ -52,41 +52,41 @@
 								<div class="inner">
 
 									<h3 class="major">Setting The Scene</h3>
-									<p>During production it became clear that a great way to dress and style our game would be with distinct lighting. The programmers were tasked with transitioning our rendering pipleline to deferred lighting, and the artist began to set their requirements.<br>An incredible artist on our team named <a href="https://rach_mw.artstation.com/">Rachel Missingham</a> asked for a way to control the ambient light throughout the enviroment. The issue stemmed from wanting a soft ambient light in rooms that the player couldn't access, and an almost blacked out light where the players couldn't access.</p>
-									<p>Our intitial ambient light was made in two parts, a colour multiply with a very dark colour, and a directional light, these helped us keep some depth to the game despite its near orthographic state, but obviously this didnt work fit our requirements. Thankfully Lochlan had setup a floor texture system for the game that used world space coordiantes to remap UV coordinates, taking this I was able to create an "ambient pass" that was take screen space normals and albedo to create an ambient light buffer using the world space coordinate remap. Then the ball was in Rachel's court, with a visit to photoshop all an artist would have to do is paint a map of the ambient light and pass it into the engines asset folder.<br>Here is a before and after:</p>
+									<p>During production it became clear that a great way to dress and style our game would be with distinct lighting. The programmers were tasked with transitioning our rendering pipeline to deferred lighting, and the artist began to set their requirements.<br>An incredible artist on our team named <a href="https://rach_mw.artstation.com/">Rachel Missingham</a> asked for a way to control the ambient light throughout the environment. The issue stemmed from wanting a soft ambient light in rooms that the player couldn't access, and an almost blacked out light where the players couldn't access.</p>
+									<p>Our initial ambient light was made in two parts, a colour multiply with a very dark colour, and a directional light, these helped us keep some depth to the game despite its near orthographic state, but obviously this didn't work fit our requirements. Thankfully Lochlan had setup a floor texture system for the game that used world space coordinates to remap UV coordinates, taking this I was able to create an "ambient pass" that was take screen space normals and albedo to create an ambient light buffer using the world space coordinate remap. Then the ball was in Rachel's court, with a visit to Photoshop all an artist would have to do is paint a map of the ambient light and pass it into the engines asset folder.<br>Here is a before and after:</p>
 									<div class="row gtr-uniform">
 										<div class="col-6"><span class="image fit"><img src="images/OldAmbient.png" alt="" /></span></div>
 										<div class="col-6"><span class="image fit"><img src="images/AmbientPainted.png" alt="" /></span></div>
 									</div>
 									<br>
 									<h3 class="major">"Contact" Shadows</h3> 
-									<p>With point lights and spotlights came shadows, spotlights come easy, a single depth target per light, plus a frustum makes writing and reading to the depth target simple, but point lights require a lot more work, however instead we decided to lock point lgiths to be shadowless light casters. These shadowless lightsources help dress a scene but they lack a certain presence against dynamic shapes, so following a suggestion from our teacher, we decided that point lights could have the unique property of ray marching shadows.<br>The first step is taking a screen space position, and stepping along a line towards the light source, if the ray's depth is greater than the screen space depth, the pixel should be cast in shadow. This technique is much more useful for small differences, so casting shadows close to the light, and only stepping slightly. I used this article by <a href = "https://panoskarabelas.com/posts/screen_space_shadows/">Panos Karabelas</a> on screen space shadows, and this is how it looked: </p>
+									<p>With point lights and spotlights came shadows, spotlights come easy, a single depth target per light, plus a frustum makes writing and reading to the depth target simple, but point lights require a lot more work, however instead we decided to lock point lights to be shadowless light casters. These shadowless light sources help dress a scene but they lack a certain presence against dynamic shapes, so following a suggestion from our teacher, we decided that point lights could have the unique property of ray marching shadows.<br>The first step is taking a screen space position, and stepping along a line towards the light source, if the ray's depth is greater than the screen space depth, the pixel should be cast in shadow. This technique is much more useful for small differences, so casting shadows close to the light, and only stepping slightly. I used this article by <a href = "https://panoskarabelas.com/posts/screen_space_shadows/">Panos Karabelas</a> on screen space shadows, and this is how it looked: </p>
 									<div class="col-6"><span class="image fit"><img src="images/smolShadows.gif" alt="" /></span></div>
-									<p>So you may have noticed that these dont look great in play time, with our camera so far away and most of our meshes lacking some smaller knooks and crannies, but oh well, I figured why not just explore this further. So instead the shadows now step along an incredible range, and each fragment that renders in the point light pass also does the check, which gives us increible shadows like this: </p>
+									<p>So you may have noticed that these don't look great in play time, with our camera so far away and most of our meshes lacking some smaller nooks and crannies, but oh well, I figured why not just explore this further. So instead the shadows now step along an incredible range, and each fragment that renders in the point light pass also does the check, which gives us incredible shadows like this: </p>
 									<div class="col-6"><span class="image fit"><img src="images/Shadows.gif" alt="" /></span></div>
 									<p>These shadows look mostly correct, but due to their screen space nature they loose a bit of fidelity when looked at for too long, which gave us the perfect hint at what to do next, these dramatic and crazy shadows can still be used, for EXPLOSIONS!<br></p>
 									<div class="col-6"><span class="image fit"><img src="images/Explosions.gif" alt="" /></span></div>
-									<p>They look crazy and fun, and taking that risk in exploring contact shadows further unlocked that for the game. Additionally there is some TAA support hidden in Panos Karabelas's blog post, that when used in a pipeline that doesnt support it has this moving shadow effect, which normally would look off or weird, but in our case is a perfect match.
+									<p>They look crazy and fun, and taking that risk in exploring contact shadows further unlocked that for the game. Additionally there is some TAA support hidden in Panos Karabelas's blog post, that when used in a pipeline that doesn't support it has this moving shadow effect, which normally would look off or weird, but in our case is a perfect match.
 									<h3 class="major">Shadow Walls</h3>
 									<p>Shortly after shadowing was locked in for lights, spotlights were used to dress every part of the levels, but a problem became rather apparent, due to the top-down nature of our game we have walls in the scene that are short so that players can see over them, however this means spotlights that would be used to dress one room will bleed into the next when placed higher than the walls, not a very "real" effect.</p>
 									<div class="col-6"><span class="image fit"><img src="images/ShadowWallsOut.gif" alt="" /></span></div>
 									<p>The artist working on set dressing made it clear that they would like an alternative option, some "invisible" wall that blocked shadows from entering into the next room over. Our saving grace came in ECS again. <i>(I'm a big fan)</i> Simply making a component that our designers can add to each shadow blocking object, that adds a mesh to the shadow pass directly above the wall line and transcends too many units tall.</p>
-									<p>Despite the somewhat badass (or edgey) sounding name, Shadow Walls aren't ground breaking by any means, but the journey to create this feature was the one we traveresed to getting the engine complete, all of the previous weeks of engine ground work and pipeline creating had made making shadow walls into one of the proudest and sweetest 3 hours of the project.</p>
+									<p>Despite the somewhat badass (or edgy) sounding name, Shadow Walls aren't ground breaking by any means, but the journey to create this feature was the one we traversed to getting the engine complete, all of the previous weeks of engine ground work and pipeline creating had made making shadow walls into one of the proudest and sweetest 3 hours of the project.</p>
 									<div class="col-6"><span class="image fit"><img src="images/ShadowWallsIn.gif" alt="" /></span></div>
 									<h3 class="major">Line Lights</h3>
-									<p>As with most games, our two player characters had iterations on their programming and design exist from nealry the beginning.</p>
+									<p>As with most games, our two player characters had iterations on their programming and design exist from nearly the beginning.</p>
 									<div class="col-6"><span class="image fit"><img src="images/syncOld.webp" alt="" /></span></div>
-									<p>Much to our artists annoyance, Sync had maintained a very early feature through out almost the entirty of development, their gun shot out 1 pixel thick debug lines whenever they shot. 
+									<p>Much to our artists annoyance, Sync had maintained a very early feature through out almost the entirety of development, their gun shot out 1 pixel thick debug lines whenever they shot. 
 									<br>These shots had some added visual bonus of being passed to the bloom buffer, but they always looked out of place with the rest of the scene. So after some messing around with a shader to create a nice visual effect for the beam I was left with one last desire. What if? It also cast light along the line? </p>
 									<div class="row gtr-uniform">
 										<div class="col-6"><span class="image fit"><img src="images/syncShotSingleLight.png" alt="" /></span></div>
 										<div class="col-6"><span class="image fit"><img src="images/RainbowLife.gif" alt="" /></span></div>
 									</div>
-									<p> This is possibly the strangest and simplest shader code I had written, since our floor doesnt have PBR I can get away with some visual mistakes, the Line Light shader is nearly identical to a point light, except it calculates the nearest point on the line as the centre of the point light.
+									<p> This is possibly the strangest and simplest shader code I had written, since our floor doesn't have PBR I can get away with some visual mistakes, the Line Light shader is nearly identical to a point light, except it calculates the nearest point on the line as the centre of the point light.
 									
 									<p>With some more time I'd like to correct the PBR error, but Line Lights came in right as the game was finishing its last week of development, and I couldn't be happier.
 									<h3 class="major">In Conclusion</h3>
-									<p> If you get the chance, mess around with crazy light and "non"-light ideas, Sync and Ecco had a lot of life to it originally, but now is has the extra bit of identity thanks to the results of weird experiements.
+									<p> If you get the chance, mess around with crazy light and "non"-light ideas, Sync and Ecco had a lot of life to it originally, but now is has the extra bit of identity thanks to the results of weird experiments.
 								</div>
 							</div>
 
@@ -98,7 +98,7 @@
 							<h2 class="major">Get in touch</h2>
 							<p>I'm always happy to talk, be that via email, LinkedIn, or however else you can get a hold of me. <br> I am available to chat about my work, about doing work, or just any general questions or topics <3 </p>
 							<ul class="contact">
-								<li class="icon solid fa-envelope"><a href="obr0008@gmail">obr0008@gmail.com</a></li>
+								<li class="icon solid fa-envelope"><a href="mailto:contact@tomtomobrien.com">contact@tomtomobrien.com</a></li>
 								<li class="icon brands fa-github"><a href= "https://github.com/tombeeeeeeeeeee"> Github </a></i>
 								<li class="icon brands fa-linkedin"><a href= "https://www.linkedin.com/in/thomas-o-brien-va-dev/"> LinkedIn </a></i>
 								<li class="icon brands fa-spotify"><a href= "https://open.spotify.com/artist/1xL1xhQqsOfYD3nHovp42M?si=8sLZxxpyTOOam05KC0ZnCw"> My Band: Mac and the Steeze </a></i>
