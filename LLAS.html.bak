@@ -81,7 +81,7 @@
 									<p> <strong> IMAGES GO HERE </strong> </p>
 									<p> This is possibly the strangest and simplest shader code I had written, since our floor doesnt have PBR I can get away with some visual mistakes, the Line Light shader is nearly identical to a point light, except it calculates the nearest point on the line as the centre of the point light, and BAM!</p>
 									<p> <strong> IMAGE GOES HERE </strong> </p>
-									<p>With some more time I'd like to correct the PBR error, but Line Lights came in right as the game was finishing its last week of development, and I couldn't be happier.
+									<p>With some more time I'd like to correct the PBR error, but Line Lights came in right as the game was finishing its last week of development.
 									<h3 class="major">In Conclusion</h3>
 									<p> If you get the chance, mess around with crazy light and "non"-light ideas, Sync and Ecco had a lot of life to it originally, but now is has the extra bit of identity thanks to the results of weird experiements.
 								</div>
