@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Generic - </title>
+		<title>Sync and Ecco</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -43,7 +43,7 @@
 						<header>
 							<div class="inner">
 								<h2>Sync and Ecco</h2>
-								<p>Phasellus non pulvinar erat. Fusce tincidunt nisl eget ipsum.</p>
+								<p>C++ Custom Engine Game</p>
 							</div>
 						</header>
 
@@ -51,26 +51,47 @@
 							<div class="wrapper">
 								<div class="inner">
 
-									<h3 class="major">Lorem ipsum dolor</h3>
-									<p>Morbi mattis mi consectetur tortor elementum, varius pellentesque velit convallis. Aenean tincidunt lectus auctor mauris maximus, ac scelerisque ipsum tempor. Duis vulputate ex et ex tincidunt, quis lacinia velit aliquet. Duis non efficitur nisi, id malesuada justo. Maecenas sagittis felis ac sagittis semper. Curabitur purus leo donec vel dolor at arcu tincidunt bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce ut aliquet justo. Donec id neque ipsum. Integer eget ultricies odio. Nam vel ex a orci fringilla tincidunt. Aliquam eleifend ligula non velit accumsan cursus. Etiam ut gravida sapien.</p>
+									<h3 class="major">Sync and Ecco</h3>
+									<p>Development for Sync and Ecco began on the 22nd of July, and for 135 days in a team of 8 we made this vertical slice experience. My role was rather simply titled Programmer, as myself and <a href = "https://locstock.dev">Lochlan</a> began to build the foundations of the engine and game from the ground up, immediately, because all streams starting on the same day. This meant Lochlan and I had a large challenge ahead with creating tooling and interfaces for our artists and designers ASAP. Given any other circumstance I would never reccomened this.</p>
+									<p> <strong> IMAGE HERE</strong></p>
+									<p>So to get Sync and Ecco working we needed to build a multitude of systems. Early on we decided that to improve collaboration, and give us something to learn with, Lochlan and I moved the engine to an Entity Component System. Using ECS meant that we could both work independently on Systems or Components with minimal conflict errors. There was nothing better for maintiaing a friendship and working relationship tahn a well maintained codebase and documentation, and ECS was the best friend of that friendship.</p>
+									<p>Working in ECS we had some major systems to implement, Lochaln and I mixed our work load, here are the things I was mostly responsible for:
+									<ul>
+										<li><strong>Render System:</strong> handles all things rendering, eg. <i>(Some fun notes on this in my Little Articles)</i></li>
+										<li><strong>Enemy System:</strong> Manages enemy movement and abilities <i>(Some fun notes on this in my Little Articles)</i></li>
+										<li><strong>Physics System:</strong> Manages 2D Collisions and Raycasts <i> (All Done In House) </i> </li>
+										<li><strong>Health System:</strong> Tracks damage and FX downstream of HP </li>
+										<li><strong>Trigger System:</strong> Manages all componets that activate / listen for a trigger</li>
+									</ul>
+									 All of these having as well their own ways to interface with within the engines work-space. <i>(UI courtesy of ImGUI and Lochlan)</i></p>
+									
+									<p> <strong> EDITOR IMAGE HERE</strong></p>
+									
+									<p>Development began rather humblely for Sync and Ecco. starting with some basic line rendering in space, control two player concepts around a scene. The scene was built with our alpha level editor, one of the players was driven using our physics engine to emulate a car, and the other with impluses. </p>
+									
+									<p> <strong> GIF OF SYNC AND ECCO MOVING EARLY HERE </strong> </p>
+									
+									<p>Sync and Ecco included a mix of "Tried and Tested", and "Let's Try and Test This", some examples I dive deeper into the Little Articles below, but we also spent a lot of time physically learning how a car should steer and drive, which was 50% code and physics, and 50% me driving around a parking lot. But otherwise Sync and Ecco has been a project of learning, learning about deferred rendering, screen space decals, and SSAO. Learning about how to create tools for our artists to work in user friendly spaces. Learning how to manage our time with important features and deadlines, and learning how to not burn out. <br>Just like any creative outlet a custom engine project is demanding, but it has been incredibly fufilling. I am so proud of my 3rd step into a customn physics pipeline, my first steps into a graphics pipeline and some artistic shaders, and my last steps as a formal student.</p>
+									
+									<p> <strong> Links and Beyond </strong></p>
 
-									<p>Vestibulum ultrices risus velit, sit amet blandit massa auctor sit amet. Sed eu lectus sem. Phasellus in odio at ipsum porttitor mollis id vel diam. Praesent sit amet posuere risus, eu faucibus lectus. Vivamus ex ligula, tempus pulvinar ipsum in, auctor porta quam. Proin nec commodo, vel scelerisque nisi scelerisque. Suspendisse id quam vel tortor tincidunt suscipit. Nullam auctor orci eu dolor consectetur, interdum ullamcorper ante tincidunt. Mauris felis nec felis elementum varius.</p>
-
-									<h3 class="major">Vitae phasellus</h3>
-									<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
+									<p> I hope if anything that the work we have done can be a great lesson in custom engine development for noivces, so check out the <a href = "https://github.com/Locstock04/LochieGraphics">Github</a> and the games <a href = "https://basalt-formations.itch.io/sync-and-ecco" > download link.</a></p>
+									
+									<h3 class="major">Little Articles</h3>
+									<p>Through out the development of Sync and Ecco, I learnt a lot, some of these things I wrote up individual pieces on, check them out below.</p>
 
 									<section class="features">
 										<article>
 											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-											<h3 class="major">Sed feugiat lorem</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="#" class="special">Learn more</a>
+											<h3 class="major">Lines, Lights, and Shadows</h3>
+											<p>Blending accessible artistic tools, and a beautiful game, as a programmer</p>
+											<a href="LLAS.html" class="special">Learn more</a>
 										</article>
 										<article>
 											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-											<h3 class="major">Nisl placerat</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="#" class="special">Learn more</a>
+											<h3 class="major">Texture LookUps and Movement</h3>
+											<p>Avoiding path-finding AI while optimising</p>
+											<a href="TLAM.html" class="special">Learn more</a>
 										</article>
 									</section>
 
@@ -80,19 +101,21 @@
 					</section>
 
 				<!-- Footer -->
-				<section id="footer">
-					<div class="inner">
-						<h2 class="major">Get in touch</h2>
-						<p>I'm always happy to talk, be that via email, LinkedIn, or however else you can get a hold of me. <br> I am available to chat about my work, about doing work, or just any general questions or topics <3 </p>
-						<ul class="contact">
-							<li class="icon solid fa-envelope">obr0008@gmail.com</li>
-							<li class="icon brands fa-instagram"><a href= "https://instagram.com/tombeeeeeeeeeee">instagram.com/tombeeeeeeeeeee</a></li>
-						</ul>
-						<ul class="copyright">
-							<li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-						</ul>
-					</div>
-				</section>
+					<section id="footer">
+						<div class="inner">
+							<h2 class="major">Get in touch</h2>
+							<p>I'm always happy to talk, be that via email, LinkedIn, or however else you can get a hold of me. <br> I am available to chat about my work, about doing work, or just any general questions or topics <3 </p>
+							<ul class="contact">
+								<li class="icon solid fa-envelope"><a href="obr0008@gmail">obr0008@gmail.com</a></li>
+								<li class="icon brands fa-github"><a href= "https://github.com/tombeeeeeeeeeee"> Github </a></i>
+								<li class="icon brands fa-linkedin"><a href= "https://www.linkedin.com/in/thomas-o-brien-va-dev/"> LinkedIn </a></i>
+								<li class="icon brands fa-spotify"><a href= "https://open.spotify.com/artist/1xL1xhQqsOfYD3nHovp42M?si=8sLZxxpyTOOam05KC0ZnCw"> My Band: Mac and the Steeze </a></i>
+							</ul>
+							<ul class="copyright">
+								<li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
 
 			</div>
 
