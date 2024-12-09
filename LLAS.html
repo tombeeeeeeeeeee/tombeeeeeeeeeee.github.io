@@ -52,35 +52,38 @@
 								<div class="inner">
 
 									<h3 class="major">Setting The Scene</h3>
-									<p>During production it became clear that a great way to dress and style our game would be with distinct lighting. On the porgrammers we were tasked with transitioning our rendering pipleline to deferred lighting, and the artist began to set their requirements.<br>An incredible artist on our team named <a href="https://rach_mw.artstation.com/">Rachel Missingham</a> asked for a way to paint ambient light across the game. The issue steemed from wanting a soft ambinet light in rooms that the player couldn't access, and an amlost blacked out light where the players couldnt access.</p>
+									<p>During production it became clear that a great way to dress and style our game would be with distinct lighting. The programmers were tasked with transitioning our rendering pipleline to deferred lighting, and the artist began to set their requirements.<br>An incredible artist on our team named <a href="https://rach_mw.artstation.com/">Rachel Missingham</a> asked for a way to control the ambient light throughout the enviroment. The issue stemmed from wanting a soft ambient light in rooms that the player couldn't access, and an almost blacked out light where the players couldn't access.</p>
 									<p>Our intitial ambient light was made in two parts, a colour multiply with a very dark colour, and a directional light, these helped us keep some depth to the game despite its near orthographic state, but obviously this didnt work fit our requirements. Thankfully Lochlan had setup a floor texture system for the game that used world space coordiantes to remap UV coordinates, taking this I was able to create an "ambient pass" that was take screen space normals and albedo to create an ambient light buffer using the world space coordinate remap. Then the ball was in Rachel's court, with a visit to photoshop all an artist would have to do is paint a map of the ambient light and pass it into the engines asset folder.<br>Here is a before and after:</p>
-									<p> <strong> IMAGES GO HERE </strong> </p>
-
-									<p>This was just about perfect for our situation, however, I realised that there was a missing sense of depth in the scene now, so ith a quick squaring of our SSAO pass, and some tweaks we were left with: </p>
-									<p> <strong> IMAGE GOES HERE </strong> </p>
+									<div class="row gtr-uniform">
+										<div class="col-6"><span class="image fit"><img src="images/OldAmbient.png" alt="" /></span></div>
+										<div class="col-6"><span class="image fit"><img src="images/AmbientPainted.png" alt="" /></span></div>
+									</div>
+									<br>
 									<h3 class="major">"Contact" Shadows</h3> 
 									<p>With point lights and spotlights came shadows, spotlights come easy, a single depth target per light, plus a frustum makes writing and reading to the depth target simple, but point lights require a lot more work, however instead we decided to lock point lgiths to be shadowless light casters. These shadowless lightsources help dress a scene but they lack a certain presence against dynamic shapes, so following a suggestion from our teacher, we decided that point lights could have the unique property of ray marching shadows.<br>The first step is taking a screen space position, and stepping along a line towards the light source, if the ray's depth is greater than the screen space depth, the pixel should be cast in shadow. This technique is much more useful for small differences, so casting shadows close to the light, and only stepping slightly. I used this article by <a href = "https://panoskarabelas.com/posts/screen_space_shadows/">Panos Karabelas</a> on screen space shadows, and this is how it looked: </p>
-									<p> <strong> IMAGE GOES HERE </strong> </p>
+									<div class="col-6"><span class="image fit"><img src="images/smolShadows.gif" alt="" /></span></div>
 									<p>So you may have noticed that these dont look great in play time, with our camera so far away and most of our meshes lacking some smaller knooks and crannies, but oh well, I figured why not just explore this further. So instead the shadows now step along an incredible range, and each fragment that renders in the point light pass also does the check, which gives us increible shadows like this: </p>
-									<p> <strong> IMAGE GOES HERE </strong> </p>
+									<div class="col-6"><span class="image fit"><img src="images/Shadows.gif" alt="" /></span></div>
 									<p>These shadows look mostly correct, but due to their screen space nature they loose a bit of fidelity when looked at for too long, which gave us the perfect hint at what to do next, these dramatic and crazy shadows can still be used, for EXPLOSIONS!<br></p>
-									<p> <strong> IMAGE GOES HERE </strong> </p>
+									<div class="col-6"><span class="image fit"><img src="images/Explosions.gif" alt="" /></span></div>
 									<p>They look crazy and fun, and taking that risk in exploring contact shadows further unlocked that for the game. Additionally there is some TAA support hidden in Panos Karabelas's blog post, that when used in a pipeline that doesnt support it has this moving shadow effect, which normally would look off or weird, but in our case is a perfect match.
 									<h3 class="major">Shadow Walls</h3>
 									<p>Shortly after shadowing was locked in for lights, spotlights were used to dress every part of the levels, but a problem became rather apparent, due to the top-down nature of our game we have walls in the scene that are short so that players can see over them, however this means spotlights that would be used to dress one room will bleed into the next when placed higher than the walls, not a very "real" effect.</p>
-									<p> <strong> IMAGE GOES HERE </strong> </p>
+									<div class="col-6"><span class="image fit"><img src="images/ShadowWallsOut.gif" alt="" /></span></div>
 									<p>The artist working on set dressing made it clear that they would like an alternative option, some "invisible" wall that blocked shadows from entering into the next room over. Our saving grace came in ECS again. <i>(I'm a big fan)</i> Simply making a component that our designers can add to each shadow blocking object, that adds a mesh to the shadow pass directly above the wall line and transcends too many units tall.</p>
-									<p>Despite the somewhat badass(or edgy) sounding name, Shadow Walls aren't ground breaking by any means, but the journey to create this feature was the one we traveresed to getting the engine complete, all of the previous weeks of engine ground work and pipeline creating had made making shadow walls into one of the proudest and sweetest 3 hours of the project.</p>
-									<p> <strong> IMAGE GOES HERE </strong> </p>
+									<p>Despite the somewhat badass (or edgey) sounding name, Shadow Walls aren't ground breaking by any means, but the journey to create this feature was the one we traveresed to getting the engine complete, all of the previous weeks of engine ground work and pipeline creating had made making shadow walls into one of the proudest and sweetest 3 hours of the project.</p>
+									<div class="col-6"><span class="image fit"><img src="images/ShadowWallsIn.gif" alt="" /></span></div>
 									<h3 class="major">Line Lights</h3>
 									<p>As with most games, our two player characters had iterations on their programming and design exist from nealry the beginning.</p>
-									<p> <strong> IMAGE GOES HERE </strong> </p>
-									<p>Much to our artists annoyance, Sync had maintained a very early feature through out almost the entirty of development, their gun shot out 1 pixel thick debug lines whenever they shot. </p>
-									<p> <strong> IMAGE GOES HERE </strong> </p>
-									<p>These shots had some added visual bonus of being passed to the bloom buffer, but they always looked out of place with the rest of the scene. So after some messing around with a shader to create a nice visual effect for the beam I was left with one last desire. What if? It also cast light along the line? </p>
-									<p> <strong> IMAGES GO HERE </strong> </p>
-									<p> This is possibly the strangest and simplest shader code I had written, since our floor doesnt have PBR I can get away with some visual mistakes, the Line Light shader is nearly identical to a point light, except it calculates the nearest point on the line as the centre of the point light, and BAM!</p>
-									<p> <strong> IMAGE GOES HERE </strong> </p>
+									<div class="col-6"><span class="image fit"><img src="images/syncOld.webp" alt="" /></span></div>
+									<p>Much to our artists annoyance, Sync had maintained a very early feature through out almost the entirty of development, their gun shot out 1 pixel thick debug lines whenever they shot. 
+									<br>These shots had some added visual bonus of being passed to the bloom buffer, but they always looked out of place with the rest of the scene. So after some messing around with a shader to create a nice visual effect for the beam I was left with one last desire. What if? It also cast light along the line? </p>
+									<div class="row gtr-uniform">
+										<div class="col-6"><span class="image fit"><img src="images/syncShotSingleLight.png" alt="" /></span></div>
+										<div class="col-6"><span class="image fit"><img src="images/RainbowLife.gif" alt="" /></span></div>
+									</div>
+									<p> This is possibly the strangest and simplest shader code I had written, since our floor doesnt have PBR I can get away with some visual mistakes, the Line Light shader is nearly identical to a point light, except it calculates the nearest point on the line as the centre of the point light.
+									
 									<p>With some more time I'd like to correct the PBR error, but Line Lights came in right as the game was finishing its last week of development, and I couldn't be happier.
 									<h3 class="major">In Conclusion</h3>
 									<p> If you get the chance, mess around with crazy light and "non"-light ideas, Sync and Ecco had a lot of life to it originally, but now is has the extra bit of identity thanks to the results of weird experiements.
