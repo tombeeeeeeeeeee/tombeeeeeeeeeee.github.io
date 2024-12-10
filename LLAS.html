@@ -55,8 +55,8 @@
 									<p>During production it became clear that a great way to dress and style our game would be with distinct lighting. The programmers were tasked with transitioning our rendering pipeline to deferred lighting, and the artist began to set their requirements.<br>An incredible artist on our team named <a href="https://rach_mw.artstation.com/">Rachel Missingham</a> asked for a way to control the ambient light throughout the environment. The issue stemmed from wanting a soft ambient light in rooms that the player couldn't access, and an almost blacked out light where the players couldn't access.</p>
 									<p>Our initial ambient light was made in two parts, a colour multiply with a very dark colour, and a directional light, these helped us keep some depth to the game despite its near orthographic state, but obviously this didn't work fit our requirements. Thankfully Lochlan had setup a floor texture system for the game that used world space coordinates to remap UV coordinates, taking this I was able to create an "ambient pass" that was take screen space normals and albedo to create an ambient light buffer using the world space coordinate remap. Then the ball was in Rachel's court, with a visit to Photoshop all an artist would have to do is paint a map of the ambient light and pass it into the engines asset folder.<br>Here is a before and after:</p>
 									<div class="row gtr-uniform">
-										<div class="col-6"><span class="image fit"><img src="images/OldAmbient.png" alt="" /></span></div>
-										<div class="col-6"><span class="image fit"><img src="images/AmbientPainted.png" alt="" /></span></div>
+										<div class="col-6"><span class="image fit"><img src="images/OldAmbient.PNG" alt="" /></span></div>
+										<div class="col-6"><span class="image fit"><img src="images/AmbientPainted.PNG" alt="" /></span></div>
 									</div>
 									<br>
 									<h3 class="major">"Contact" Shadows</h3> 
@@ -79,7 +79,7 @@
 									<p>Much to our artists annoyance, Sync had maintained a very early feature through out almost the entirety of development, their gun shot out 1 pixel thick debug lines whenever they shot. 
 									<br>These shots had some added visual bonus of being passed to the bloom buffer, but they always looked out of place with the rest of the scene. So after some messing around with a shader to create a nice visual effect for the beam I was left with one last desire. What if? It also cast light along the line? </p>
 									<div class="row gtr-uniform">
-										<div class="col-6"><span class="image fit"><img src="images/syncShotSingleLight.png" alt="" /></span></div>
+										<div class="col-6"><span class="image fit"><img src="images/syncShotSingleLight.PNG" alt="" /></span></div>
 										<div class="col-6"><span class="video-container"><video src="images/RainbowLife.webm" alt="" controls loop/></span></div>
 									</div>
 									<p> This is possibly the strangest and simplest shader code I had written, since our floor doesn't have PBR I can get away with some visual mistakes, the Line Light shader is nearly identical to a point light, except it calculates the nearest point on the line as the centre of the point light.
